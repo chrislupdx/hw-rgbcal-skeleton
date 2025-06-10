@@ -21,7 +21,7 @@ https://github.com/probe-rs/probe-rs/issues/1235 for the
 details.
 
 ## Wiring
-
+ 
 Connect the RGB LED to the MB2 as follows:
 
 * Red to P9 (GPIO1)

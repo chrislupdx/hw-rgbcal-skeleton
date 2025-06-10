@@ -46,6 +46,7 @@ async fn main(_spawner: Spawner) -> ! {
     rtt_init_print!();
     let board = Microbit::default();
 
+    //is Irqs just being declared in csope or is it used elsewhere
     bind_interrupts!(struct Irqs {
         SAADC => saadc::InterruptHandler;
     });
@@ -56,6 +57,7 @@ async fn main(_spawner: Spawner) -> ! {
     let blue = led_pin(AnyPin::from(board.p16));
     let rgb: Rgb = Rgb::new([red, green, blue], 100);
 
+//   oh is this the rotary dial coude
     let mut saadc_config = saadc::Config::default();
     saadc_config.resolution = saadc::Resolution::_14BIT;
     let saadc = saadc::Saadc::new(

@@ -1,5 +1,5 @@
 use crate::*;
-
+//uh where do we grab pins
 type RgbPins = [Output<'static, AnyPin>; 3];
 
 pub struct Rgb {
