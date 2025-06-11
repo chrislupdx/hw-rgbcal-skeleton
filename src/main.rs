@@ -67,9 +67,22 @@ async fn main(_spawner: Spawner) -> ! {
         [saadc::ChannelConfig::single_ended(board.p2)],
     );
     let knob = Knob::new(saadc).await;
+    
     let mut ui = Ui::new(knob, board.btn_a, board.btn_b);
 
-    join::join(rgb.run(), ui.run()).await;
+    join::join(rgb.run(), ui.run()).await; 
+    //does what does rgb.run and ui.run return and how does that differ
+    // how do we ingest that
+
+
+    // use knob::measure to return a u32 
+    // does it need to be detected in any way
+    //ok we need to touch the knob
+    // we need to tocuh the led
+    // setting and reporting Green and Blue levels and frame rate.
+    // Make the measurements and give an approximate minimum frame rate and maximum percentage on time for Green and Blue to get a decent White. Add those to the README.
+
+
 
     panic!("fell off end of main loop");
 }
