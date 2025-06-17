@@ -16,6 +16,13 @@ green: 7
 blue: 7
 frame rate: 8
 
+6/17 9:38
+red: 4        
+green: 8     
+blue: 4 
+frame rate: 9 
+
+
 todo:
 Share the frame rate value between the Ui and the Rgb structs.
 Adjust Rgb delays according to the frame rate.
@@ -79,7 +86,7 @@ jus always controls Blue. You should see the color change
 from green to teal-blue as you turn the knob clockwise.)
 
 * No buttons held: Change the frame rate in steps of 10
-  frames per second from 10..160. <done with caveats>
+  frames per second from 10..160. <done>
 * A button held: Change the blue level from off to on over
   16 steps. <done, with caveats>
 * B button held: Change the green level from off to on over

@@ -64,12 +64,16 @@ impl Ui {
                 .await;
                 self.state.show();
             }
+            //wait are we supposed to in each conditional
+                //1. save previous frame rate
+                //2. set framerate to whatever the conditional wants
+                //3. set it back to previous frame rate?
 
             
             //if only button A is held (BLUE)
             if buttona_level == Level::Low && buttonb_level == Level::High {
             //   Change the BLUE level from off on over 16 steps.
-                // TODO: 16 steps
+                // TODO: 1x26 steps, rn this is just doing this over whatever frametick time 
                 self.state.levels[2] = level;
                 set_rgb_levels(|rgb| {
                     *rgb = self.state.levels;
@@ -98,7 +102,9 @@ impl Ui {
                 .await;
             }
             self.state.show();
-            Timer::after_millis(50).await;
+            
+            let time_frame = self.state.frame_rate.clamp(1,16);
+            Timer::after_millis(50).await; //wait we adjust this????????, thinking through how to translate frame_rate gracefully
         }
     }
 }
