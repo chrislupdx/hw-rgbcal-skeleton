@@ -10,6 +10,11 @@ Prelim decent white:
 - frame rate: 10
 
 
+- all of the colors need to go from off to on over 16 steps
+- frame rate: need to hcange in steps of 10 frames per second 10..160
+
+
+----------------------------------------------------------------------------
 This tool is designed to find out a decent frame rate and
 maximum RGB component values to produce a white-looking RGB
 of reasonable brightness.
@@ -53,20 +58,20 @@ jus always controls Blue. You should see the color change
 from green to teal-blue as you turn the knob clockwise.)
 
 * No buttons held: Change the frame rate in steps of 10
-  frames per second from 10..160.
+  frames per second from 10..160. <done with caveats>
 * A button held: Change the blue level from off to on over
-  16 steps.
+  16 steps. <done, with caveats>
 * B button held: Change the green level from off to on over
-  16 steps.
+  16 steps. <done, with caveats>
 * A+B buttons held: Change the red level from off to on over
-  16 steps.
+  16 steps. <done, with caveats>
 
 The "frame rate" (also known as the "refresh rate") is the
 time to scan out all three colors. (See the scanout code.)
 At 30 frames per second, every 1/30th of a second the LED
 should scan out all three colors. If the frame rate is too
 low, the LED will appear to "blink". If it is too high, it
-will eat CPU for no reason.
+will eat CPU for no reason. <in progress>
 
 I think the frame rate is probably set higher than it needs
 to be right now: it can be tuned lower.

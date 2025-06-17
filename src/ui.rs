@@ -19,8 +19,8 @@ impl UiState {
 impl Default for UiState {
     fn default() -> Self {
         Self {
-            levels: [LEVELS - 16, LEVELS - 16, LEVELS - 16], //what should they actually be
-            frame_rate: 100, //is this a leading or trailing inicator
+            levels: [LEVELS - 16, LEVELS - 16, LEVELS - 16],
+            frame_rate: 100,
         }
     }
 }
@@ -50,7 +50,6 @@ impl Ui {
         .await;
         self.state.show();
         loop {
-            //detect if change happened to button
             let buttona_level: Level = self._button_a.get_level();
             let buttonb_level: Level = self._button_b.get_level();
             let level = self.knob.measure().await;
@@ -58,10 +57,10 @@ impl Ui {
             //if no buttons held (frame rate)
             if  buttona_level == Level::High && buttonb_level == Level::High {
                 // Change the frame rate in steps of 10 frames per second from 10..160.
-                //current range is printing 1-16
                 self.state.frame_rate = level as u64;
+                frame_tick_time(self.state.frame_rate);
                 self.state.show();
-               //this currently also adjusts thb levels of blue
+                // i do not see my frame rate adjusting stuff strongly yet
             }
 
             //if only button A is held (BLUE)
@@ -70,7 +69,6 @@ impl Ui {
                 // TODO: 16 steps
             //i wonder if we can just leave this outside of the conditional, but this feels good for now
                 self.state.levels[2] = level;
-                // self.state.show();
                 set_rgb_levels(|rgb| {
                     *rgb = self.state.levels;
                 })
@@ -80,8 +78,8 @@ impl Ui {
             //if only button b is held (green)
             if buttona_level == Level::High && buttonb_level == Level::Low {
                 // change the green level from off on over 16 steps
+                // TODO 16 STEPS STUFF
                 self.state.levels[1] = level;
-                // self.state.show();
                 set_rgb_levels( |rgb| {
                     *rgb = self.state.levels;
                 })
@@ -91,23 +89,14 @@ impl Ui {
              //if only button B and A are held (red)
              if buttona_level == Level::Low && buttonb_level == Level::Low {
                 self.state.levels[0] = level;
-                // self.state.show();
                 set_rgb_levels( |rgb| {
                     *rgb = self.state.levels;
                 })
                 .await;
             }
-            
-            // if level != self.state.levels[2] { //which level is even being cheked here?
-            //     self.state.levels[2] = level;
-            //     self.state.show();
-            //     set_rgb_levels(|rgb| { //wait rgb stuff is set here too
-            //         *rgb = self.state.levels;
-            //     })
-            //     .await;
-            // }
             self.state.show();
             Timer::after_millis(50).await;
         }
     }
 }
+
