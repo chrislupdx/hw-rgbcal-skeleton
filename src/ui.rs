@@ -63,11 +63,7 @@ impl Ui {
                 })
                 .await;
                 self.state.show();
-            //thought 1: write a global setter
-            //thought 2: trace self.state.frame_rate and see if we can touch it from rgb.rs
             }
-            //thought on manipulating frame rate is hitting the rgb::frame_tick_time with the modified frame_rate leve, but frame_tick_time is only called in new()
-            //oh wait how do we set rgb::tick_time
 
             
             //if only button A is held (BLUE)
