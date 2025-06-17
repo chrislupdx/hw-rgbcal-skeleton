@@ -45,7 +45,7 @@ where
 
 async fn set_framerate<F>(setter: F)
 where 
-    F: FnOnce(&mut u64), //set tick_time?
+    F: FnOnce(&mut u64),
 {
     let mut frame_levels = FRAMERATE_STATE.lock().await;
     setter(&mut frame_levels);
@@ -55,8 +55,6 @@ async fn get_framerate() -> u64 {
     let frame_rate = FRAMERATE_STATE.lock().await;
     *frame_rate
 }
-
-// wait mayube set tick_time
 
 #[embassy_executor::main]
 async fn main(_spawner: Spawner) -> ! {
