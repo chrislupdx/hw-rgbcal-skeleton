@@ -54,7 +54,7 @@ impl Ui {
             let buttona_level: Level = self._button_a.get_level();
             let buttonb_level: Level = self._button_b.get_level();
             let level = self.knob.measure().await; //are we catching the await wrong
-            rprintln!("knob level is {}", level); //knob still pissy
+            rprintln!("knob level is {}", level); 
             //does this even know how to detect or describe change in the knob?
             //oh how does the knob level and the led levels play together (measured at the same time)
             // detect for knob change
