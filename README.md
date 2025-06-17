@@ -10,6 +10,12 @@ Prelim decent white:
 - frame rate: 10
 <currently does not have framerate fully working yet>
 
+6/17 8:42 update: (its not bad)
+red: 7
+green: 7
+blue: 7
+frame rate: 8
+
 todo:
 Share the frame rate value between the Ui and the Rgb structs.
 Adjust Rgb delays according to the frame rate.
@@ -22,6 +28,7 @@ A writeup of what you did:
 - used the wrong knob
 - spent most of the time figuring out the code (figured out how to adjust colors, the ui's state values)
 
+6/17: 8:41, oh yes getters are useful. what a wonderful reminder
 
 How it went:
 - challenging in the weirdest of places outside of rotary dial shennnigans. stay tuned
