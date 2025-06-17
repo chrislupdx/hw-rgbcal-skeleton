@@ -43,7 +43,7 @@ impl Rgb {
             self.levels = get_rgb_levels().await;
             let framerate = get_framerate().await
             .clamp(1, 16); //we are allowing divide by zero. this should be minimum 1 max 16
-            self.tick_time = Rgb::frame_tick_time(framerate);
+            self.tick_time = Rgb::frame_tick_time(framerate); // *10 was here
             
             for led in 0..3 {
                 self.step(led).await;

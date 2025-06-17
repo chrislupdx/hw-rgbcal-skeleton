@@ -57,19 +57,14 @@ impl Ui {
             //if no buttons held (frame rate)
             if  buttona_level == Level::High && buttonb_level == Level::High {
                 // Change the frame rate in steps of 10 frames per second from 10..160.
-                self.state.frame_rate = level as u64;
+                self.state.frame_rate = (level * 10) as u64;
                 set_framerate( |frame_rate| {
                     *frame_rate = self.state.frame_rate;
                 })
                 .await;
                 self.state.show();
             }
-            //wait are we supposed to in each conditional
-                //1. save previous frame rate
-                //2. set framerate to whatever the conditional wants
-                //3. set it back to previous frame rate?
 
-            
             //if only button A is held (BLUE)
             if buttona_level == Level::Low && buttonb_level == Level::High {
             //   Change the BLUE level from off on over 16 steps.
@@ -92,8 +87,8 @@ impl Ui {
                 .await;
             }
 
-             //if only button B and A are held (red)
-             if buttona_level == Level::Low && buttonb_level == Level::Low {
+            //if only button B and A are held (red)
+            if buttona_level == Level::Low && buttonb_level == Level::Low {
                 //TODO 16 STEPS STUFF
                 self.state.levels[0] = level;
                 set_rgb_levels( |rgb| {
@@ -104,7 +99,7 @@ impl Ui {
             self.state.show();
             
             let time_frame = self.state.frame_rate.clamp(1,16);
-            Timer::after_millis(50).await; //wait we adjust this????????, thinking through how to translate frame_rate gracefully
+            Timer::after_millis(time_frame).await; //wait we adjust this????????, thinking through how to translate frame_rate gracefully
         }
     }
 }
