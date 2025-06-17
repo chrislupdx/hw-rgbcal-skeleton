@@ -54,30 +54,33 @@ impl Ui {
             let buttona_level: Level = self._button_a.get_level();
             let buttonb_level: Level = self._button_b.get_level();
             let level = self.knob.measure().await; //are we catching the await wrong
-            rprintln!("knob level is {}", level); 
+            // rprintln!("knob level is {}", level); 
             //does this even know how to detect or describe change in the knob?
             //oh how does the knob level and the led levels play together (measured at the same time)
             // detect for knob change
             // check/restrict for max 10::160 
-            if buttona_level == Level::Low && buttonb_level == Level::Low {
+            // if buttona_level == Level::Low && buttonb_level == Level::Low {
+             //  Change the red level from off on over 16 steps.
+                // self.state.levels[0]
+            // } 
+            if  buttona_level == Level::High && buttonb_level == Level::High {
+                //no buttons held
                 // Change the frame rate in steps of 10 frames per second from 10..160.
                 // if self.state.frame_rate and {+/- 10} by each stop
                 // rgb.frame_tick_time
-            } 
-            if  buttona_level == Level::High && buttonb_level == Level::High {
-                //  Change the red level from off on over 16 steps.
-                // self.state.levels[0]
+            //    rprintln!("{}", self.state.frame_rate);
+               self.state.frame_rate = level as u64;
             }
-            if buttona_level == Level::Low {
-                rprintln!("button A read as low");
-                //button a is which color?
-                //detect for whether the dial changes
-            }
-            if buttonb_level == Level::Low {
-                rprintln!("button B read as low");
-                //hang the  green level from off to on over 16 steps.
-                // self.state.levels[2]
-            }            
+            // if buttona_level == Level::Low {
+            //     rprintln!("button A read as low");
+            //     //button a is which color?
+            //     //detect for whether the dial changes
+            // }
+            // if buttonb_level == Level::Low {
+            //     rprintln!("button B read as low");
+            //     //hang the  green level from off to on over 16 steps.
+            //     // self.state.levels[2]
+            // }            
             //it hsould be able ot handle different changes in level why does it crash here does it crash ehere
             if level != self.state.levels[2] { //which level is even being cheked here?
                 self.state.levels[2] = level;
