@@ -70,7 +70,7 @@ impl Ui {
                 // TODO: 16 steps
             //i wonder if we can just leave this outside of the conditional, but this feels good for now
                 self.state.levels[2] = level;
-                self.state.show();
+                // self.state.show();
                 set_rgb_levels(|rgb| {
                     *rgb = self.state.levels;
                 })
@@ -81,7 +81,7 @@ impl Ui {
             if buttona_level == Level::High && buttonb_level == Level::Low {
                 // change the green level from off on over 16 steps
                 self.state.levels[1] = level;
-                self.state.show();
+                // self.state.show();
                 set_rgb_levels( |rgb| {
                     *rgb = self.state.levels;
                 })
@@ -91,21 +91,22 @@ impl Ui {
              //if only button B and A are held (red)
              if buttona_level == Level::Low && buttonb_level == Level::Low {
                 self.state.levels[0] = level;
-                self.state.show();
+                // self.state.show();
                 set_rgb_levels( |rgb| {
                     *rgb = self.state.levels;
                 })
                 .await;
             }
             
-            if level != self.state.levels[2] { //which level is even being cheked here?
-                self.state.levels[2] = level;
-                self.state.show();
-                set_rgb_levels(|rgb| { //wait rgb stuff is set here too
-                    *rgb = self.state.levels;
-                })
-                .await;
-            }
+            // if level != self.state.levels[2] { //which level is even being cheked here?
+            //     self.state.levels[2] = level;
+            //     self.state.show();
+            //     set_rgb_levels(|rgb| { //wait rgb stuff is set here too
+            //         *rgb = self.state.levels;
+            //     })
+            //     .await;
+            // }
+            self.state.show();
             Timer::after_millis(50).await;
         }
     }

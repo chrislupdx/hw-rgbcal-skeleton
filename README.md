@@ -1,5 +1,14 @@
 # rgbcal: RGB LED calibration tool
-Bart Massey 2024
+Chris 2025
+
+- Make the measurements and give an approximate minimum frame rate and maximum percentage on time for Green and Blue to get a decent White. Add those to the README.
+
+Prelim decent white:
+- red:11
+- green: 7
+- blue: 10
+- frame rate: 10
+
 
 This tool is designed to find out a decent frame rate and
 maximum RGB component values to produce a white-looking RGB
