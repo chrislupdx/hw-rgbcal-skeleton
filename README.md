@@ -8,11 +8,21 @@ Prelim decent white:
 - green: 7
 - blue: 10
 - frame rate: 10
+<currently does not have framerate fully working yet>
 
 
 - all of the colors need to go from off to on over 16 steps
 - frame rate: need to hcange in steps of 10 frames per second 10..160
 
+A writeup of what you did:
+- used the wrong knob
+- spent most of the time figuring out the code (figured out how to adjust colors, the ui's state values)
+
+
+How it went:
+- challenging in the weirdest of places outside of rotary dial shennnigans. stay tuned
+
+any other observations you find of interest: n/a
 
 ----------------------------------------------------------------------------
 This tool is designed to find out a decent frame rate and

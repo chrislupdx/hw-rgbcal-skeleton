@@ -30,18 +30,17 @@ pub const LEVELS: u32 = 16;
 
 pub static FRAMERATE_STATE: Mutex<ThreadModeRawMutex, u64 > = Mutex::new(0); //make sure this is being used in rgb i guess
 
-// this just sets the mutex and returns the result of the mutex lock, does this even use or set it ior intact with the hardware in any awy yet
 async fn get_rgb_levels() -> [u32; 3] {
     let rgb_levels = RGB_LEVELS.lock().await;
     *rgb_levels
 }
-//why would need to detect for get_rgb_levels,can't we just clobber, or would get be to check the upper and lower limit of the the color range? (will numbers be precoded for things)
+
 async fn set_rgb_levels<F>(setter: F)
 where
     F: FnOnce(&mut [u32; 3]),
 {
     let mut rgb_levels = RGB_LEVELS.lock().await;
-    setter(&mut rgb_levels); //was there an imlpemented setter for htis somewhere
+    setter(&mut rgb_levels);
 }
 
 async fn set_framerate<F>(setter: F)
@@ -72,27 +71,11 @@ async fn main(_spawner: Spawner) -> ! {
         saadc_config,  // is this right
         [saadc::ChannelConfig::single_ended(board.p2)],
     );
-    let knob = Knob::new(saadc).await; 
-    //how are we supposed to be handling the incoming changes from the knob?
-
-    
+    let knob = Knob::new(saadc).await;    
     let mut ui = Ui::new(knob, board.btn_a, board.btn_b);
     //how /when do we catch and turn the knob: is it an await change in knob or something
     // ui has access to knob and board, but not expcicit access access to the led
     // how do the rgb and ui futures work together
-    let (rgb_res, ui_res) = join::join(rgb.run(), ui.run()).await;  //is htis like my central loop or somethign 
-    //does what does rgb.run and ui.run return and how does that differ
-    // how do we ingest that
-
-
-    // use knob::measure to return a u32 
-    // does it need to be detected in any way
-    //ok we need to touch the knob
-    // we need to tocuh the led
-    // setting and reporting Green and Blue levels and frame rate.
-    // Make the measurements and give an approximate minimum frame rate and maximum percentage on time for Green and Blue to get a decent White. Add those to the README.
-
-
-
+    let (rgb_res, ui_res) = join::join(rgb.run(), ui.run()).await;  
     panic!("fell off end of main loop");
 }

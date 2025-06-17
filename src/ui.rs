@@ -63,19 +63,17 @@ impl Ui {
                 })
                 .await;
                 self.state.show();
-                // i do not see my frame rate adjusting stuff strongly yet
             //thought 1: write a global setter
             //thought 2: trace self.state.frame_rate and see if we can touch it from rgb.rs
             }
-
             //thought on manipulating frame rate is hitting the rgb::frame_tick_time with the modified frame_rate leve, but frame_tick_time is only called in new()
             //oh wait how do we set rgb::tick_time
 
+            
             //if only button A is held (BLUE)
             if buttona_level == Level::Low && buttonb_level == Level::High {
             //   Change the BLUE level from off on over 16 steps.
                 // TODO: 16 steps
-            //i wonder if we can just leave this outside of the conditional, but this feels good for now
                 self.state.levels[2] = level;
                 set_rgb_levels(|rgb| {
                     *rgb = self.state.levels;
@@ -96,6 +94,7 @@ impl Ui {
 
              //if only button B and A are held (red)
              if buttona_level == Level::Low && buttonb_level == Level::Low {
+                //TODO 16 STEPS STUFF
                 self.state.levels[0] = level;
                 set_rgb_levels( |rgb| {
                     *rgb = self.state.levels;
@@ -107,4 +106,3 @@ impl Ui {
         }
     }
 }
-
