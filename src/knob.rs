@@ -24,7 +24,7 @@ impl Knob {
         let raw = buf[0].clamp(0, 0x7fff) as u16; //what is 0x7fff on a u16? is it just the natrual max?
             //what value is it pulling off of the stuff
 
-
+        //update
         let scaled = raw as f32 / 10_000.0; //what is sthis scaling for real
         let result = ((LEVELS + 2) as f32 * scaled - 2.0) //what's really hapepnignin in this math
             .clamp(0.0, (LEVELS - 1) as f32)
