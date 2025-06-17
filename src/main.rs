@@ -28,7 +28,7 @@ use num_traits::float::FloatCore;
 pub static RGB_LEVELS: Mutex<ThreadModeRawMutex, [u32; 3]> = Mutex::new([0; 3]);
 pub const LEVELS: u32 = 16;
 
-pub static FRAMERATE_STATE: Mutex<ThreadModeRawMutex, u64 > = Mutex::new(0); //make sure this is being used in rgb i guess
+pub static FRAMERATE_STATE: Mutex<ThreadModeRawMutex, u64 > = Mutex::new(1); //make sure this is being used in rgb i guess
 
 async fn get_rgb_levels() -> [u32; 3] {
     let rgb_levels = RGB_LEVELS.lock().await;
@@ -45,11 +45,18 @@ where
 
 async fn set_framerate<F>(setter: F)
 where 
-    F: FnOnce(&mut u64),
+    F: FnOnce(&mut u64), //set tick_time?
 {
     let mut frame_levels = FRAMERATE_STATE.lock().await;
     setter(&mut frame_levels);
 }
+
+async fn get_framerate() -> u64 {
+    let frame_rate = FRAMERATE_STATE.lock().await;
+    *frame_rate
+}
+
+// wait mayube set tick_time
 
 #[embassy_executor::main]
 async fn main(_spawner: Spawner) -> ! {
@@ -68,14 +75,11 @@ async fn main(_spawner: Spawner) -> ! {
     let saadc = saadc::Saadc::new(
         board.saadc,
         Irqs,
-        saadc_config,  // is this right
+        saadc_config,
         [saadc::ChannelConfig::single_ended(board.p2)],
     );
     let knob = Knob::new(saadc).await;    
     let mut ui = Ui::new(knob, board.btn_a, board.btn_b);
-    //how /when do we catch and turn the knob: is it an await change in knob or something
-    // ui has access to knob and board, but not expcicit access access to the led
-    // how do the rgb and ui futures work together
     let (rgb_res, ui_res) = join::join(rgb.run(), ui.run()).await;  
     panic!("fell off end of main loop");
 }
