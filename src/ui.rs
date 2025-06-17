@@ -58,10 +58,18 @@ impl Ui {
             if  buttona_level == Level::High && buttonb_level == Level::High {
                 // Change the frame rate in steps of 10 frames per second from 10..160.
                 self.state.frame_rate = level as u64;
-                frame_tick_time(self.state.frame_rate);
+                set_framerate( |frame_rate| {
+                    *frame_rate = self.state.frame_rate;
+                })
+                .await;
                 self.state.show();
                 // i do not see my frame rate adjusting stuff strongly yet
+            //thought 1: write a global setter
+            //thought 2: trace self.state.frame_rate and see if we can touch it from rgb.rs
             }
+
+            //thought on manipulating frame rate is hitting the rgb::frame_tick_time with the modified frame_rate leve, but frame_tick_time is only called in new()
+            //oh wait how do we set rgb::tick_time
 
             //if only button A is held (BLUE)
             if buttona_level == Level::Low && buttonb_level == Level::High {

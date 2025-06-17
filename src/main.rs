@@ -28,6 +28,8 @@ use num_traits::float::FloatCore;
 pub static RGB_LEVELS: Mutex<ThreadModeRawMutex, [u32; 3]> = Mutex::new([0; 3]);
 pub const LEVELS: u32 = 16;
 
+pub static FRAMERATE_STATE: Mutex<ThreadModeRawMutex, u64 > = Mutex::new(0); //make sure this is being used in rgb i guess
+
 // this just sets the mutex and returns the result of the mutex lock, does this even use or set it ior intact with the hardware in any awy yet
 async fn get_rgb_levels() -> [u32; 3] {
     let rgb_levels = RGB_LEVELS.lock().await;
@@ -41,7 +43,14 @@ where
     let mut rgb_levels = RGB_LEVELS.lock().await;
     setter(&mut rgb_levels); //was there an imlpemented setter for htis somewhere
 }
-//update
+
+async fn set_framerate<F>(setter: F)
+where 
+    F: FnOnce(&mut u64),
+{
+    let mut frame_levels = FRAMERATE_STATE.lock().await;
+    setter(&mut frame_levels);
+}
 
 #[embassy_executor::main]
 async fn main(_spawner: Spawner) -> ! {
