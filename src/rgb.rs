@@ -5,7 +5,7 @@ type RgbPins = [Output<'static, AnyPin>; 3];
 pub struct Rgb {
     rgb: RgbPins,
     // Shadow variables to minimize lock contention.
-    levels: [u32; 3],
+    levels: [u32; 3], //we could use this to keep track of the 1-16 steps for color changes
     tick_time: u64,
 }
 
@@ -42,11 +42,11 @@ impl Rgb {
         loop {
             self.levels = get_rgb_levels().await;
             let framerate = get_framerate().await
-            .clamp(1, 16); //we are allowing divide by zero. this should be minimum 1 max 16
-            self.tick_time = Rgb::frame_tick_time(framerate); // *10 was here
+            .clamp(1, 16); 
+            self.tick_time = Rgb::frame_tick_time(framerate);
             
             for led in 0..3 {
-                self.step(led).await;
+                self.step(led).await; //we can count steps here and stuff, maybe use levels[] in here to keep track of it
             }
         }
     }

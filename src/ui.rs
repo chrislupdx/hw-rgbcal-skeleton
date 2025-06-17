@@ -68,8 +68,9 @@ impl Ui {
             //if only button A is held (BLUE)
             if buttona_level == Level::Low && buttonb_level == Level::High {
             //   Change the BLUE level from off on over 16 steps.
-                // TODO: 1x26 steps, rn this is just doing this over whatever frametick time 
+                // TODO: 16 steps, rn this is just doing this over whatever frametick time 
                 self.state.levels[2] = level;
+                //increment per frame until you hit hte target?, but this can change /constantly/ so do the changes to color /trail after the changes from knob?
                 set_rgb_levels(|rgb| {
                     *rgb = self.state.levels;
                 })
@@ -99,7 +100,7 @@ impl Ui {
             self.state.show();
             
             let time_frame = self.state.frame_rate.clamp(1,16);
-            Timer::after_millis(time_frame).await; //wait we adjust this????????, thinking through how to translate frame_rate gracefully
+            Timer::after_millis(time_frame).await; //Adjust Rgb delays according to the frame rate.
         }
     }
 }

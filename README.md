@@ -22,6 +22,12 @@ green: 8
 blue: 4 
 frame rate: 9 
 
+6/17 10:25
+red: 5        
+green: 5      
+blue: 5       
+frame rate: 40
+
 
 todo:
 Share the frame rate value between the Ui and the Rgb structs.
@@ -78,6 +84,11 @@ Connect the potentiometer (knob) to the MB2 as follows:
 * Pin 3 to +3.3V
 
 ## UI
+
+When we're supposed to Change the x-color level from off to on over 16 steps.
+
+does step refer to: how far an LED's color deviates from a reference color
+or step as in a single scanout of all 3 colors
 
 The knob controls the individual settings: frame rate and
 color levels. Which parameter the knob controls should be
