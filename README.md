@@ -10,6 +10,10 @@ Prelim decent white:
 - frame rate: 10
 <currently does not have framerate fully working yet>
 
+todo:
+Share the frame rate value between the Ui and the Rgb structs.
+Adjust Rgb delays according to the frame rate.
+
 
 - all of the colors need to go from off to on over 16 steps
 - frame rate: need to hcange in steps of 10 frames per second 10..160
