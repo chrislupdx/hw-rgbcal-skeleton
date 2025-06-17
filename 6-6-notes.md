@@ -4,3 +4,5 @@
 4. is the levels struct actually the thing that is setting colors for the led?
 5. reoatry doal code?>
 6. so rn it crashes when you run it and make it touch the knob.
+
+
